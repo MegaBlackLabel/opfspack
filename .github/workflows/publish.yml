@@ -15,6 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.95.0
+
+      - name: Install wasm-pack
+        run: cargo install wasm-pack --locked
+
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
