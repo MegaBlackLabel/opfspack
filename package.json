@@ -1,0 +1,39 @@
+{
+  "name": "@megablacklabel/opfspack",
+  "version": "0.1.0",
+  "type": "module",
+  "private": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "wasm:build": "cd wasm && wasm-pack build --target web --out-dir pkg",
+    "build": "bun run wasm:build && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "prepublishOnly": "bun run build"
+  },
+  "dependencies": {
+    "comlink": "^4.4.2",
+    "fflate": "^0.8.2",
+    "@sqlite.org/sqlite-wasm": "^3.48.0-build4",
+    "drizzle-orm": "^0.44.7"
+  },
+  "devDependencies": {
+    "thundoku-viewer": "workspace:*",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.8",
+    "vite-plugin-dts": "^5.0.0",
+    "vitest": "^4.1.4"
+  }
+}
