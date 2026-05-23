@@ -29,6 +29,28 @@ await manager.createPack('book-123', [
 const page = await manager.readFile('book-123', 'cover.webp')
 ```
 
+## Installation
+
+This package is published to **GitHub Packages**.
+
+Add the following to your `.npmrc` before installing:
+
+```
+@megablacklabel:registry=https://npm.pkg.github.com
+```
+
+Install via Bun (requires GitHub Packages registry config):
+
+```bash
+bun add @megablacklabel/opfspack
+```
+
+Basic import:
+
+```typescript
+import { PackManager, MemoryPackStorage } from '@megablacklabel/opfspack'
+```
+
 ## Architecture
 
 ```
@@ -181,8 +203,6 @@ class PackManager {
 ## Development
 
 ```bash
-cd packages/opfspack
-
 # Build WASM
 bun run wasm:build
 
@@ -196,6 +216,17 @@ bun run typecheck
 bun run test:run
 ```
 
+### WASM Note
+
+WASM compression requires building the Rust module before use:
+
+- Target: `wasm32-unknown-unknown`
+- Tool: `wasm-pack build --target web --out-dir pkg`
+
+OPFS requires cross-origin isolation for SharedArrayBuffer support.
+
+Bundle size impact: WASM + JS glue ~65KB compressed, LZ4 adds ~10KB, total <100KB.
+
 ## License
 
-MIT
+[MIT](./LICENSE)
