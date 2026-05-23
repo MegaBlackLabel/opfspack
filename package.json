@@ -15,6 +15,14 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MegaBlackLabel/opfspack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MegaBlackLabel/opfspack/issues"
+  },
+  "homepage": "https://github.com/MegaBlackLabel/opfspack#readme",
   "scripts": {
     "wasm:build": "cd wasm && wasm-pack build --target web --out-dir pkg",
     "build": "bun run wasm:build && vite build",
@@ -24,13 +32,13 @@
     "prepublishOnly": "bun run build"
   },
   "dependencies": {
+    "@sqlite.org/sqlite-wasm": "^3.48.0-build4",
     "comlink": "^4.4.2",
     "fflate": "^0.8.2",
-    "@sqlite.org/sqlite-wasm": "^3.48.0-build4",
     "drizzle-orm": "^0.44.7"
   },
   "devDependencies": {
-    "thundoku-viewer": "workspace:*",
+    "@types/node": "^24.12.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.8",
     "vite-plugin-dts": "^5.0.0",

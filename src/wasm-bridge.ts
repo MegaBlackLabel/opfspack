@@ -19,7 +19,7 @@ async function ensureWasmReady(): Promise<void> {
         wasmAvailable = false
       })
   }
-  return wasmReady
+  await wasmReady
 }
 
 export async function crc32(data: Uint8Array): Promise<number> {
@@ -44,7 +44,15 @@ export async function parseIndex(
   await ensureWasmReady()
   
   if (wasmAvailable) {
-    return PackIndexParser.parse_index(data, entryCount).map((entry) => ({
+    return PackIndexParser.parse_index(data, entryCount).map((entry: {
+      path: string
+      mime_type: string
+      offset: bigint
+      size: bigint
+      compressed_size: bigint
+      flags: number
+      iv: Uint8Array
+    }) => ({
       path: entry.path,
       mimeType: entry.mime_type,
       offset: entry.offset,
